@@ -1,0 +1,6 @@
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\bin\Debug\DVDLPeopleDataAccess.dll
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\bin\Debug\DVDLPeopleDataAccess.pdb
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\obj\Debug\DVDLDataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\obj\Debug\DVDLDataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\obj\Debug\DVDLPeopleDataAccess.dll
+C:\Users\User\source\repos\DVDL\DVDLPeopleDataAccess\obj\Debug\DVDLPeopleDataAccess.pdb

@@ -1,0 +1,9 @@
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\obj\Debug\DVDLPeopleBuissnesslayer.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\obj\Debug\DVDLPeopleBuissnesslayer.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\bin\Debug\DVDLPeopleBuissnesslayer.dll
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\bin\Debug\DVDLPeopleBuissnesslayer.pdb
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\bin\Debug\DVDLPeopleDataAccess.dll
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\bin\Debug\DVDLPeopleDataAccess.pdb
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\obj\Debug\DVDLPeop.1735F6D9.Up2Date
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\obj\Debug\DVDLPeopleBuissnesslayer.dll
+C:\Users\User\source\repos\DVDL\DVDLPeopleBuissnesslayer\obj\Debug\DVDLPeopleBuissnesslayer.pdb
