@@ -1,5 +1,6 @@
 ﻿using DVDLPeopleDataAccess;
 using DVDLUsersBuissnesslayer;
+using DVDLPeopleBuissnesslayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVDLPeopleBuissnesslayer
+namespace DVDLApplicationsBuissnesslayer
 {
 	
 	public class clsApplications
@@ -21,7 +22,7 @@ namespace DVDLPeopleBuissnesslayer
 			public decimal ApplicationFees { get; set; }
 
 		};
-		stApplicationType ApplicationTypeInfo;
+		public stApplicationType ApplicationTypeInfo;
 		public int ApplicationID { get; set; }
 		public string ApplicantNationalNo { get; set; }
 		public string ApplicationsTitle { get; set; }
@@ -29,15 +30,14 @@ namespace DVDLPeopleBuissnesslayer
 		public DateTime ApplicationDate { get; set; }
 		public DateTime LastStatusDate	{ get; set; }
 		public string CreatorUsername { get; set; }
-		public decimal ApplicationFees	{ get; set; }
 		public decimal PaidFees { get; set; }
-		clsPerson Person;
-		clsUser User;
+		public clsPerson Person;
+		public clsUser User;
 		enMode _Mode;
 		#endregion
 
 		#region Constructors
-		clsApplications()
+		public clsApplications()
 		{
 			ApplicationID = -1;
 			Person = new clsPerson();
@@ -47,15 +47,16 @@ namespace DVDLPeopleBuissnesslayer
 			ApplicationDate=DateTime.Now;
 			LastStatusDate=DateTime.Now;
 			User = new clsUser();
-			ApplicationFees=0;
+			ApplicationTypeInfo.ApplicationFees = 0;
 			PaidFees=0;
 			_Mode = enMode.Add;
 		}
 
-		clsApplications(string nationalNo,string applicationsTitle,
+		clsApplications(int applicationID,string nationalNo,string applicationsTitle,
 			Byte applicationStatus,DateTime applicationDate,DateTime lastStatusDate,string creatorUsername,
-			decimal applicationFees,decimal paidFees)
+			decimal paidFees)
 		{
+			ApplicationID= applicationID;
 			Person = clsPerson.Find(nationalNo);
 			ApplicantNationalNo=nationalNo;
 			ApplicationsTitle=applicationsTitle;
@@ -63,9 +64,15 @@ namespace DVDLPeopleBuissnesslayer
 			ApplicationDate=applicationDate;
 			LastStatusDate=lastStatusDate;
 			User = clsUser.Find(creatorUsername);
-			//CreatorUsername=creatorUsername;
-			ApplicationFees=applicationFees;
+			CreatorUsername=creatorUsername;
 			PaidFees = paidFees;
+			int ApplicationTypeID=-1;
+			decimal ApplicationFees=0;
+			clsApplicationsDataAccess.GetApplicationTypeInfo(applicationsTitle,
+				ref ApplicationTypeID, ref ApplicationFees);
+			ApplicationTypeInfo.ApplicationTypeTitle=applicationsTitle;
+			ApplicationTypeInfo.ApplicationTypeID=ApplicationTypeID;
+			ApplicationTypeInfo.ApplicationFees=ApplicationFees;
 			_Mode=enMode.Update;
 		}
 
@@ -87,9 +94,9 @@ namespace DVDLPeopleBuissnesslayer
 				ref applicationDate, ref applicationsTitle, ref applicationFees, ref applicationStatus, ref lastStatusDate,
 				ref paidFees, ref creatorUsername))
 			{
-				return new clsApplications(applicantNationalNo, applicationsTitle,
+				return new clsApplications(applicationID,applicantNationalNo, applicationsTitle,
 					applicationStatus, applicationDate, lastStatusDate, creatorUsername,
-					applicationFees, paidFees);
+					paidFees);
 			}
 			else
 				return new clsApplications();
@@ -110,9 +117,9 @@ namespace DVDLPeopleBuissnesslayer
 				ref applicationDate, ref applicationsTitle, ref applicationFees, ref applicationStatus, ref lastStatusDate,
 				ref paidFees, ref creatorUsername))
 			{
-				return new clsApplications(applicantNationalNo, applicationsTitle,
+				return new clsApplications(applicationID,applicantNationalNo, applicationsTitle,
 					applicationStatus, applicationDate, lastStatusDate, creatorUsername,
-					applicationFees, paidFees);
+					paidFees);
 			}
 			else
 				return new clsApplications();
@@ -120,10 +127,21 @@ namespace DVDLPeopleBuissnesslayer
 
 		#endregion
 
-		#region VisualizeData
+		#region GetData
 		public static DataTable GetApplications()
 		{
 			return clsApplicationsDataAccess.GetAllApplications();
+		}
+
+		public static DataTable GetApplicationTypes()
+		{
+			return clsApplicationsDataAccess.GetApplicationTypes();
+		}
+
+		public static bool GetTypeInfo(string Title, int ApplicationTypeID, decimal ApplicationFees)
+		{
+			return clsApplicationsDataAccess.GetApplicationTypeInfo(Title,
+				ref ApplicationTypeID, ref ApplicationFees);
 		}
 
 		#endregion

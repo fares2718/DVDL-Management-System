@@ -24,7 +24,7 @@ namespace DVDLPeopleDataAccess
 						 FROM Applications INNER JOIN
                          ApplicationTypes ON Applications.ApplicationTypeID = ApplicationTypes.ApplicationTypeID INNER JOIN
                          People ON Applications.ApplicantPersonID = People.PersonID INNER JOIN
-                         Users ON Applications.CreatedByUserID = Users.UserID AND People.PersonID = Users.PersonID";
+                         Users ON Applications.CreatedByUserID = Users.UserID ";
 			SqlCommand cmd = new SqlCommand(query, connection);
 
 			try
@@ -60,7 +60,7 @@ namespace DVDLPeopleDataAccess
 						 FROM Applications INNER JOIN
                          ApplicationTypes ON Applications.ApplicationTypeID = ApplicationTypes.ApplicationTypeID INNER JOIN
                          People ON Applications.ApplicantPersonID = People.PersonID INNER JOIN
-                         Users ON Applications.CreatedByUserID = Users.UserID AND People.PersonID = Users.PersonID
+                         Users ON Applications.CreatedByUserID = Users.UserID
 						 WHERE NationalNo = @NationalNo;";
 			SqlCommand cmd = new SqlCommand(query, connection);
 			cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
@@ -189,6 +189,30 @@ namespace DVDLPeopleDataAccess
 			return isFound;
 		}
 
+		public static DataTable GetApplicationTypes()
+		{
+			DataTable dt = new DataTable();
+			SqlConnection connection = new SqlConnection(clsDataAccessSetteing.ConnectionString);
+			string query=@"SELECT * From ApplicationTypes order by ApplicationTypeTitle";
+			SqlCommand cmd = new SqlCommand(query, connection);
+			try
+			{
+				connection.Open();
+				SqlDataReader reader = cmd.ExecuteReader();
+				if(reader.HasRows)
+				{
+					dt.Load(reader);
+				}
+				reader.Close();
+			}
+			catch (Exception ex) { }
+			finally
+			{
+				connection.Close();
+			}
+			return dt;
+		}
+
 
 		#endregion
 
@@ -266,6 +290,7 @@ namespace DVDLPeopleDataAccess
 								 WHERE ApplicationID = @ApplicationID";
 			SqlCommand cmd = new SqlCommand(query, connection);
 			cmd.Parameters.AddWithValue("@PaidFees", PaidFees);
+			cmd.Parameters.AddWithValue("@ApplicationID", applicationID);
 			try
 			{
 				connection.Open();
